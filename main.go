@@ -1,12 +1,7 @@
 package main
 
 import (
-	"fmt"
 	"log"
-)
-
-const (
-	fileSource = "./data/test.png"
 )
 
 func dealError(err error) {
@@ -14,14 +9,5 @@ func dealError(err error) {
 		log.Fatalln(err)
 	}
 }
-func main() {
-	analysisList := RunAnalysis()
-	vector := ImageLoadVector(fileSource)
-	classifyResult := RunClassify(vector, analysisList)
-	for _, result := range classifyResult {
-		fmt.Println(result)
-	}
 
-	fmt.Printf("The result may be %d\n", classifyResult[0].Value)
-	fmt.Scanln()
-}
+func main() {}

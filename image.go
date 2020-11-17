@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	_ "image/gif"
 	_ "image/jpeg"
@@ -69,6 +70,18 @@ func isBlack(colorPoint [4]uint32) bool {
 // 长度 * 宽度 * [0|1]
 type RasterizeList [][]byte
 
+func (r RasterizeList) print() {
+	for _, result := range r {
+		fmt.Println(result)
+	}
+}
+
+func (c ClassifyList) print() {
+	for _, result := range c {
+		fmt.Println(result)
+	}
+}
+
 // ImageRasterize 返回图片点阵数组
 func ImageRasterize(imgInfo ImageInfo) RasterizeList {
 	// 定义点阵数组
@@ -77,10 +90,12 @@ func ImageRasterize(imgInfo ImageInfo) RasterizeList {
 		var rasterizeRow []byte
 
 		for _, color := range row {
-			// 判断黑色，是1否0
-			var flag byte = 0
+			// 判断黑色
+			var flag byte
 
 			if isBlack(color) {
+				flag = 0
+			} else {
 				flag = 1
 			}
 			rasterizeRow = append(rasterizeRow, flag)
